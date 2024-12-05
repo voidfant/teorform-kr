@@ -9,7 +9,7 @@ class Compiler:
             # Лексический анализ
             lexer = Lexer(code)
             tokens = lexer.tokenize()
-            pprint(tokens)
+            # pprint(tokens)
             print("Лексический анализ завершен.")
             
             # Синтаксический анализ

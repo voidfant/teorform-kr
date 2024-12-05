@@ -1,5 +1,4 @@
 from typing import List, Dict, Optional, Set
-from pprint import pprint
 from src.tokens.token import Token
 from src.tokens.token_type import TokenType
 
@@ -126,7 +125,6 @@ class SemanticAnalyzer:
         
         # Проверка совместимости типов
         if not self._are_types_compatible(left_type, right_type):
-            pprint(self.symbol_table)
             raise SyntaxError(f"Несовместимые типы при присваивании: {left_type} ≠ {right_type} ({left_token.value} {right_token.value})")
     
     def _validate_operation(self, op_pos: int):

@@ -60,12 +60,15 @@ class Parser:
                 raise SyntaxError("Ожидается ';' после объявления типа")
     
     def _parse_statements(self):
-        # Разбор последовательности операторов
         while not self._check(TokenType.END):
+            # Разбор оператора
             self._parse_statement()
             
-            # Необязательная точка с запятой между операторами
-            self._match(TokenType.SEMICOLON)
+            # Проверка точки с запятой для всех, кроме последнего оператора
+            if not self._check_next(TokenType.END) and not self._check(TokenType.END):
+                if not self._match(TokenType.SEMICOLON):
+                    raise SyntaxError("Требуется точка с запятой между операторами")
+            
     
     def _parse_statement(self):
         # Расширим разбор операторов
@@ -255,6 +258,11 @@ class Parser:
             return True
         return False
     
+    def _check_next(self, *types) -> bool:
+        if self.current_pos + 1 >= len(self.tokens):
+            return False
+        return self.tokens[self.current_pos + 1].type in types
+
     def _check(self, *types) -> bool:
         # Проверка текущего токена без продвижения
         if self.current_pos >= len(self.tokens):

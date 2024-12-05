@@ -32,7 +32,7 @@ class Lexer:
             # Операторы и символы
             if self._handle_operators():
                 continue
-            
+
             # Идентификаторы и ключевые слова
             if char.isalpha():
                 self._handle_identifier()
@@ -165,5 +165,4 @@ class Lexer:
                 self.tokens.append(Token(token_type, op))
                 self.current_pos += len(op)
                 return True
-        print('не нашел')
         return False
