@@ -1,5 +1,12 @@
 from src.compiler import Compiler
+import argparse
 
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='UVM Assembler')
+    parser.add_argument('--build-ast-verbose', '-v', action='store_true', help='Флаг вывода Абстрактного Синтаксического Дерева')
+    
+    return parser.parse_args()
 
 def main():
     sample_code = """
@@ -30,8 +37,8 @@ def main():
         write(z, result)
     end.
     """
-    
-    Compiler.compile(sample_code)
+    args = parse_args()
+    Compiler.compile(sample_code, ast_verbose=args.build_ast_verbose)
 
 if __name__ == "__main__":
     main()
